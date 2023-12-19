@@ -11,10 +11,9 @@ import { cn } from "@/lib/utils";
 type Props = {
   chats: DrizzleChat[];
   chatId: number;
-  isPro: boolean;
 };
 
-const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
+const ChatSideBar = ({ chats, chatId }: Props) => {
   const [loading, setLoading] = React.useState(false);
 
   return (
