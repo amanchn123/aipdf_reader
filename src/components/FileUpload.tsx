@@ -45,15 +45,14 @@ const FileUpload = () => {
       try {
         setUploading(true);
         const data = await ref(analytics, `ai_pdf/${file.name}`);
-        const uploadFile = await uploadBytes(data, file).then((result) =>
-          getDownloadURL(result.ref)
-        );
+        const uploadFile = await uploadBytes(data, file)
+        const url = await getDownloadURL(uploadFile.ref);
 
         // if (!data?.file_key || !data.file_name) {
         //   toast.error("Something went wrong");
         //   return;
         // }         
-        mutate(uploadFile, {
+        mutate(url, {
           onSuccess: ({ chat_id }) => {
             toast.success("Chat created!");
             router.push(`/chat/${chat_id}`);
