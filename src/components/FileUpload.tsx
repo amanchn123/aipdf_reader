@@ -29,7 +29,7 @@ const FileUpload = () => {
     },
   });
 
-  const handleFileUpload = async (file) => {
+  const handleFileUpload = async (file:File) => {
     if (!file) return;
   
     try {
