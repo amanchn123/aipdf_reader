@@ -29,6 +29,39 @@ const FileUpload = () => {
     },
   });
 
+  const handleFileUpload = async (file) => {
+    if (!file) return;
+  
+    try {
+      setUploading(true);
+  
+      const data = await ref(analytics, `ai_pdf/${file.name}`);
+      const uploadResult = await uploadBytes(data, file);
+      const url = await getDownloadURL(uploadResult.ref);
+       console.log("uurrr",url)
+      // if (!data?.file_key || !data.file_name) {
+      //   toast.error("Something went wrong");
+      //   return;
+      // }
+  
+      mutate(url, {
+        onSuccess: ({ chat_id }) => {
+          toast.success("Chat created!");
+          router.push(`/chat/${chat_id}`);
+        },
+        onError: (err) => {
+          toast.error("Error creating chat");
+          console.error(err);
+        },
+      });
+  
+    } catch (error) {
+      console.log('Error in downloading file', error);
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: { "application/pdf": [".pdf"] },
     maxFiles: 1,
@@ -40,28 +73,31 @@ const FileUpload = () => {
         // bigger than 10mb!
         toast.error("File too large");
         return;
-      }         
+      }     
+      
+      await handleFileUpload(file);   
 
       try {
-        setUploading(true);
-        const data = await ref(analytics, `ai_pdf/${file.name}`);
-        const uploadFile = await uploadBytes(data, file)
-        const url = await getDownloadURL(uploadFile.ref);
+        // setUploading(true);
+        // const data = await ref(analytics, `ai_pdf/${file.name}`);
+        // const uploadFile = await uploadBytes(data, file)
+        // const url = await getDownloadURL(uploadFile.ref);
 
         // if (!data?.file_key || !data.file_name) {
         //   toast.error("Something went wrong");
         //   return;
-        // }         
-        mutate(url, {
-          onSuccess: ({ chat_id }) => {
-            toast.success("Chat created!");
-            router.push(`/chat/${chat_id}`);
-          },
-          onError: (err) => {
-            toast.error("Error creating chat");
-            console.error(err);
-          },
-        });
+        // }
+            
+        // mutate(url, {
+        //   onSuccess: ({ chat_id }) => {
+        //     toast.success("Chat created!");
+        //     router.push(`/chat/${chat_id}`);
+        //   },
+        //   onError: (err) => {
+        //     toast.error("Error creating chat");
+        //     console.error(err);
+        //   },
+        // });
         
       } catch (error) {
         console.log('error in downlaoding file',error);
