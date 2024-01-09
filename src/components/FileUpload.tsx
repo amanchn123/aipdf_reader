@@ -19,10 +19,10 @@ const FileUpload = () => {
   const [uploading, setUploading] = React.useState(false);
 
   const { mutate } = useMutation({
-    mutationFn: async (url) => {
+    mutationFn: async (data) => {
 
       const response = await axios.post("/api/create-chat", {
-        url,filenaam
+        url:data.url,filenaam:data.filenaam
       }); 
       
       return response.data;
@@ -38,13 +38,12 @@ const FileUpload = () => {
       const data = await ref(analytics, `ai_pdf/${file.name}`);
       const uploadResult = await uploadBytes(data, file);
       const url = await getDownloadURL(uploadResult.ref);
-       console.log("uurrr",url)
       // if (!data?.file_key || !data.file_name) {
       //   toast.error("Something went wrong");
       //   return;
       // }
   
-      mutate(url, {
+      mutate({ url, filenaam: file.name }, {
         onSuccess: ({ chat_id }) => {
           toast.success("Chat created!");
           router.push(`/chat/${chat_id}`);
