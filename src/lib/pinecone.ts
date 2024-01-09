@@ -23,7 +23,7 @@ type PDFPage = {
   };
 };
 
-export const loadfirebaseinpinecone = async (url,filenaam) => {
+export const loadfirebaseinpinecone = async (url: string, filenaam: string) => {
   try {
     const response = await fetch(url);
 
