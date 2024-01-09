@@ -10,7 +10,7 @@ import { eq } from "drizzle-orm";
 export default async function Home() {
   const { userId } = await auth();
   const isAuth = !!userId;
-  let firstChat;
+  let firstChat="";
   if (userId) {
     firstChat = await db.select().from(chats).where(eq(chats.userId, userId));
     if (firstChat) {
