@@ -19,7 +19,7 @@ const FileUpload = () => {
   const [uploading, setUploading] = React.useState(false);
 
   const { mutate } = useMutation({
-    mutationFn: async (data) => {
+    mutationFn: async (data: { url: string; filenaam: string }) => {
 
       const response = await axios.post("/api/create-chat", {
         url:data.url,filenaam:data.filenaam
