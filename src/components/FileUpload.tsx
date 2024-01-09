@@ -46,10 +46,7 @@ const FileUpload = () => {
         setUploading(true);
         const data = await ref(analytics, `ai_pdf/${file.name}`);
         const uploadFile = await uploadBytes(data, file).then((result) =>
-          getDownloadURL(result.ref).then((url) => {
-            return url
-
-          })
+          getDownloadURL(result.ref)
         );
 
         // if (!data?.file_key || !data.file_name) {
