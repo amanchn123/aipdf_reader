@@ -14,7 +14,7 @@ import { useMutation } from "@tanstack/react-query";
 // https://github.com/aws/aws-sdk-js-v3/issues/4126
 
 const FileUpload = () => {
-  const [filenaam,setFilenaam]=useState()
+  const [filenaam,setFilenaam]=useState<string>("")
   const router = useRouter();
   const [uploading, setUploading] = React.useState(false);
 
@@ -35,7 +35,7 @@ const FileUpload = () => {
     onDrop: async (acceptedFiles) => {
       const file = acceptedFiles[0];
       
-      setFilenaam(file.name);
+      setFilenaam(file?.name);
       if (file.size > 10 * 1024 * 1024) {
         // bigger than 10mb!
         toast.error("File too large");
