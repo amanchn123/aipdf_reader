@@ -62,6 +62,7 @@ export async function POST(req: Request) {
           role: "user",
         });
       },
+
       onCompletion: async (completion) => {
         // save ai message into db
         await db.insert(_messages).values({

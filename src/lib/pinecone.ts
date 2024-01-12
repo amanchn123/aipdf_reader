@@ -57,6 +57,7 @@ export const loadfirebaseinpinecone = async (url: string, filenaam: string) => {
 };
 
 async function embedDocument(doc: Document) {
+if(doc){
   try {
     const embeddings = await getEmbeddings(doc.pageContent);
     const hash = md5(doc.pageContent);
@@ -73,6 +74,9 @@ async function embedDocument(doc: Document) {
     console.log("error embedding document", error);
     throw error;
   }
+}else{
+  console.log("no docc")
+}
 }
 
 export const truncateStringByBytes = (str: string, bytes: number) => {
