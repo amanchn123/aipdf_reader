@@ -45,13 +45,16 @@ export default async function Home() {
 
         <p className="max-w-xl mt-1 text-lg text-slate-600">
           Join millions of students, researchers and professionals to instantly
-          answer questions and understand research with AI
+          answer questions and understand research with AI.
+         
         </p>
+        
 
         <div className="w-full mt-4">
           {isAuth ? (
             <FileUpload />
           ) : (
+            
             <Link href="/sign-in">
               <Button>
                 Login to get Started!
@@ -59,6 +62,10 @@ export default async function Home() {
               </Button>
             </Link>
           )}
+        </div>
+        <div style={{marginTop:"14px"}}>
+        Created by <br />
+        <Link style={{color:"blue"}} href="www.linkedin.com/in/aman-chouhan-a963031a8">Aman chouhan </Link><br />Full-Stack Developer
         </div>
       </div>
     </div>
