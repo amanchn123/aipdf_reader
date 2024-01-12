@@ -75,7 +75,7 @@ if(doc){
     throw error;
   }
 }else{
-  console.log("no docc")
+  console.log("no doccs")
 }
 }
 
